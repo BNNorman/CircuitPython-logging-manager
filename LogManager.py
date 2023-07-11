@@ -1,7 +1,18 @@
+import adafruit_logging as logging
+
 class LogMan:
     
     stream=None
     streambackup=None
+
+    # logging levels
+    NOTSET=logging.NOTSET
+    DEBUG=logging.DEBUG
+    INFO=logging.INFO
+    WARNING=logging.WARNING
+    ERROR=logging.ERROR
+    CRITICAL=logging.CRITICAL
+
     
     @staticmethod
     def setNullHandler():
@@ -14,4 +25,23 @@ class LogMan:
         if LogMan.streambackup is not None:
             LogMan.stream=logMan.streambackup
             logMan.streambackup=None
-   
+        
+        
+    @staticmethod
+    def setFileStream(filename,mode="a"):
+        """Must be called first immediately after importing LogManager and before importing other modules which use LogManager"""
+        assert type(filename) is str,"Expected a string for the filename"
+        
+        try:
+            LogMan.stream=logging.FileHandler(filename,mode)
+        except Exception as e:
+            
+            
+    @staticmethod
+    def getLogger(name,level=None):
+        assert level is int and level>=0,"getLogger optional level parameter must be an int>=0"
+        log=logging.getLogger(name)
+        log.addHandler(LogMan.stream)
+        if level is not None:
+            log.setLevel(level)
+        return log
