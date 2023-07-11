@@ -26,7 +26,15 @@ log=LogMan.getLogger("MAIN",<optional level>)
 The adafruit_logging default level is WARNING so you might not see any log messages till you lower it. By default the LogManager sets the level to zero so all messages are displayed - useful while debugging.
 
 Log levels can be set using LogMan.INFO, LogMan.DEBUG etc.
- 
+
+# Closing the log
+
+It is necessary to close the log to ensure pending messages are written to the log file.
+
+```
+LogMan.close()
+```
+
 # Adafruit_logging changes
 Get a copy of adafruit_logging.py from the latest bundle then modify line 168 and change it from
 ```
