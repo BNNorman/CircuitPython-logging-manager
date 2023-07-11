@@ -40,11 +40,11 @@ class LogMan:
             
     @staticmethod
     def getLogger(name,level=None):
+	assert LogMan.stream is not None,"LogManager stream must be created first with LogMan.setFileStream(<log file name>)"
         assert level is int and level>=0,"getLogger optional level parameter must be an int>=0"
         log=logging.getLogger(name)
         log.addHandler(LogMan.stream)
-        if level is not None:
-            log.setLevel(level)
+        log.setLevel(level)
         return log
 
     @staticmethod
