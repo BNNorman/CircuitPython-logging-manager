@@ -46,3 +46,7 @@ class LogMan:
         if level is not None:
             log.setLevel(level)
         return log
+
+    @staticmethod
+    def close():
+        LogMan.stream.close() # flushes the stream
