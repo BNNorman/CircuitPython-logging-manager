@@ -1,0 +1,5 @@
+2383.424: MAIN INFO - Starting LogManager test
+2383.430: MAIN INFO - testLogging starting
+2383.434: subclass1 INFO - subclass1  starting
+2383.437: subclass2 DEBUG - subclass2  starting
+2383.439: MAIN INFO - testLogging finished
