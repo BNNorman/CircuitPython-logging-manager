@@ -35,7 +35,8 @@ class LogMan:
         try:
             LogMan.stream=logging.FileHandler(filename,mode)
         except Exception as e:
-            
+            print(f"Unable to create a file stream {e}")
+            raise
             
     @staticmethod
     def getLogger(name,level=None):
