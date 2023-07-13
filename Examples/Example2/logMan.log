@@ -1,0 +1,44 @@
+16645.992: Main INFO - This is main
+16646.141: sub2 INFO - Sub2 loading
+16646.148: sub1 INFO - Sub1 loading
+16646.164: sub1 INFO - sub1 Sub1() 0
+16646.164: sub1 INFO - going into Sub2
+16646.172: sub2 DEBUG - sub2 Sub2() 0
+16646.180: sub2 DEBUG - sub2 Sub2() 1
+16646.188: sub2 DEBUG - sub2 Sub2() 2
+16646.195: sub2 DEBUG - sub2 Sub2() 3
+16646.203: sub2 DEBUG - sub2 Sub2() 4
+16646.211: sub2 INFO - Sub2 finished
+16646.219: sub1 INFO - sub1 Sub1() 1
+16646.219: sub1 INFO - going into Sub2
+16646.227: sub2 DEBUG - sub2 Sub2() 0
+16646.281: sub2 DEBUG - sub2 Sub2() 1
+16646.289: sub2 DEBUG - sub2 Sub2() 2
+16646.297: sub2 DEBUG - sub2 Sub2() 3
+16646.305: sub2 DEBUG - sub2 Sub2() 4
+16646.313: sub2 INFO - Sub2 finished
+16646.320: sub1 INFO - sub1 Sub1() 2
+16646.320: sub1 INFO - going into Sub2
+16646.328: sub2 DEBUG - sub2 Sub2() 0
+16646.336: sub2 DEBUG - sub2 Sub2() 1
+16646.344: sub2 DEBUG - sub2 Sub2() 2
+16646.352: sub2 DEBUG - sub2 Sub2() 3
+16646.359: sub2 DEBUG - sub2 Sub2() 4
+16646.367: sub2 INFO - Sub2 finished
+16646.367: sub1 INFO - sub1 Sub1() 3
+16646.469: sub1 INFO - going into Sub2
+16646.484: sub2 DEBUG - sub2 Sub2() 0
+16646.484: sub2 DEBUG - sub2 Sub2() 1
+16646.492: sub2 DEBUG - sub2 Sub2() 2
+16646.500: sub2 DEBUG - sub2 Sub2() 3
+16646.508: sub2 DEBUG - sub2 Sub2() 4
+16646.516: sub2 INFO - Sub2 finished
+16646.523: sub1 INFO - sub1 Sub1() 4
+16646.531: sub1 INFO - going into Sub2
+16646.531: sub2 DEBUG - sub2 Sub2() 0
+16646.539: sub2 DEBUG - sub2 Sub2() 1
+16646.547: sub2 DEBUG - sub2 Sub2() 2
+16646.555: sub2 DEBUG - sub2 Sub2() 3
+16646.656: sub2 DEBUG - sub2 Sub2() 4
+16646.664: sub2 INFO - Sub2 finished
+16646.672: Main INFO - This is main finishing
