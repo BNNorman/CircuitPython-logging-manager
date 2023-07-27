@@ -1,6 +1,6 @@
 # CircuitPython-logging-manager
 
-This manager, with one change to adafruit_logging.py, allows imported submodules to share the same logfile and to identify which submodule emitted the log entry. Awfully useful for debugging.
+This manager allows imported submodules to share the same logfile and to identify which submodule (Logger name) emitted the log entry. Awfully useful for debugging.
 
 A simple example shows the log message is prepended with the logger name as used with getLogger("NAME").
 
