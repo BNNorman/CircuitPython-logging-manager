@@ -1,4 +1,28 @@
-import adafruit_logging as logging
+try:
+    import adafruit_logging as logging
+except:
+    raise Exception("adafruit_logging library is required")
+
+# override adafruit_logging format and emit
+
+class StreamHandler(logging.StreamHandler):
+    
+    def format(self, record: LogRecord) -> str:
+        """Generate a timestamped message.
+
+        :param record: The record (message object) to be logged
+        """
+        return f"{record.created:<0.3f}: {record.name} {record.levelname} - {record.msg}"
+    
+    def emit(self, record: LogRecord) -> None:
+        """Generate the message and write it to the UART.
+
+        :param record: The record (message object) to be logged
+        """
+        self.stream.write(self.format(record)+self.terminator)
+        # with a lot of logging going on this is needed
+        # even when LogMan flushes the stream when close() is called
+        self.stream.flush()
 
 class LogMan:
     
@@ -34,15 +58,17 @@ class LogMan:
         
         try:
             LogMan.stream=open(filename,mode)
-			LogMan.handler=logging.StreamHandler(stream)
+            LogMan.handler=StreamHandler(LogMan.stream)
+            
         except Exception as e:
             print(f"Unable to create a file stream {e}")
             raise
             
     @staticmethod
     def getLogger(name,level=None):
-		assert LogMan.stream is not None,"LogManager stream must be created first with LogMan.setFileStream(<log file name>)"
-        assert level is int and level>=0,"getLogger optional level parameter must be an int>=0"
+        if level is not None:
+            assert LogMan.stream is not None,"LogManager stream must be created first with LogMan.setFileStream(<log file name>)"
+            assert type(level) is int and level>=0,"getLogger optional level parameter must be an int>=0"
         log=logging.getLogger(name)
         log.addHandler(LogMan.handler)
         log.setLevel(level)
