@@ -27,6 +27,19 @@ The adafruit_logging default level is WARNING so you might not see any log messa
 
 Log levels can be set using LogMan.INFO, LogMan.DEBUG etc.
 
+# Setting all loggers to the same level
+
+In a project where sub-modules use the LogManager and are onverted to MPY files , changing the logging level of submodules would require you to edit the PY files, cross compile them and upload it to the device.
+
+Also when development is complete you probably want to set the level of all loggers to either INFO or WARNING.
+
+The setAllLoggerLevels() method allows you to set all the LogManager users in one command from the main module.
+
+```
+LogMan.setAllLoggerLevels(<LEVEL>)
+```
+
+
 # Closing the log
 
 It is necessary to close the log to ensure pending messages are written to the log file.
@@ -44,3 +57,4 @@ to
 ```
 return f"{record.created:<0.3f}: {record.name} {record.levelname} - {record.msg}"
 ```
+

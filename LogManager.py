@@ -28,6 +28,7 @@ class LogMan:
     
     stream=None
     streambackup=None
+    loggers = {}
 
     # logging levels
     NOTSET=logging.NOTSET
@@ -36,7 +37,6 @@ class LogMan:
     WARNING=logging.WARNING
     ERROR=logging.ERROR
     CRITICAL=logging.CRITICAL
-
     
     @staticmethod
     def setNullHandler():
@@ -49,8 +49,7 @@ class LogMan:
         if LogMan.streambackup is not None:
             LogMan.stream=logMan.streambackup
             logMan.streambackup=None
-        
-        
+
     @staticmethod
     def setFileStream(filename,mode="a"):
         """Must be called first immediately after importing LogManager and before importing other modules which use LogManager"""
@@ -73,6 +72,13 @@ class LogMan:
         log.addHandler(LogMan.handler)
         log.setLevel(level)
         return log
+
+    @staticmethod
+    def setAllLoggerLevels(newLevel):
+        assert type(newLevel) is int
+
+        for log in LogMan.loggers:
+            LogMan.loggers[log].setLevel(newLevel)
 
     @staticmethod
     def close():
