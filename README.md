@@ -39,7 +39,6 @@ The setAllLoggerLevels() method allows you to set all the LogManager users in on
 LogMan.setAllLoggerLevels(<LEVEL>)
 ```
 
-
 # Closing the log
 
 It is necessary to close the log to ensure pending messages are written to the log file.
@@ -57,4 +56,14 @@ to
 ```
 return f"{record.created:<0.3f}: {record.name} {record.levelname} - {record.msg}"
 ```
+# Log message types
+
+I have experienced adafruit_logging crashing when trying to log some byte arrays. The trick is to convert the message to a list :-
+
+```
+msg=b'....'
+log.debug(f"something went wrong {list(msg)}")
+```
+It's more readable anyway.
+
 
