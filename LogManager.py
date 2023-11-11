@@ -1,5 +1,6 @@
 try:
     import adafruit_logging as logging
+    import sys
 except:
     raise Exception("adafruit_logging library is required")
 
@@ -22,13 +23,15 @@ class StreamHandler(logging.StreamHandler):
         self.stream.write(self.format(record)+self.terminator)
         # with a lot of logging going on this is needed
         # even when LogMan flushes the stream when close() is called
+        if self.stream==sys.stderr:
+            return
         self.stream.flush()
 
 class LogMan:
     
     stream=None
     streambackup=None
-    loggers = {}
+    loggers={}
 
     # logging levels
     NOTSET=logging.NOTSET
@@ -37,6 +40,7 @@ class LogMan:
     WARNING=logging.WARNING
     ERROR=logging.ERROR
     CRITICAL=logging.CRITICAL
+
     
     @staticmethod
     def setNullHandler():
@@ -49,7 +53,7 @@ class LogMan:
         if LogMan.streambackup is not None:
             LogMan.stream=logMan.streambackup
             logMan.streambackup=None
-
+        
     @staticmethod
     def setFileStream(filename,mode="a"):
         """Must be called first immediately after importing LogManager and before importing other modules which use LogManager"""
@@ -60,8 +64,10 @@ class LogMan:
             LogMan.handler=StreamHandler(LogMan.stream)
             
         except Exception as e:
-            print(f"Unable to create a file stream {e}")
-            raise
+            print(f"Unable to create a file stream {e}. Using stderr instead.")
+            LogMan.stream=sys.stderr
+            LogMan.handler=StreamHandler(LogMan.stream)
+            #raise
             
     @staticmethod
     def getLogger(name,level=logging.NOTSET):
@@ -71,15 +77,19 @@ class LogMan:
         log=logging.getLogger(name)
         log.addHandler(LogMan.handler)
         log.setLevel(level)
+        # save the logger
+        LogMan.loggers[name]=log
         return log
 
     @staticmethod
     def setAllLoggerLevels(newLevel):
         assert type(newLevel) is int
-
+    
         for log in LogMan.loggers:
             LogMan.loggers[log].setLevel(newLevel)
-
+            
+        
+        
     @staticmethod
     def close():
         LogMan.stream.close() # flushes the stream
